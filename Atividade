@@ -1,0 +1,8 @@
+Criar uma classe aluno com os seguintes Atributos:
+- R.A
+- Nome
+- Sobrenome
+- email
+- senha
+
+Implemente o código necessário usando funções.

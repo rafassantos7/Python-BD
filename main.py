@@ -34,6 +34,25 @@ session = Session()
 # Criando tabela.
 Base = declarative_base()
 
+#Apensentando dados:
+def exibindo_tabela(cliente,Cliente):
+    print("\nExibindo dados de todos os clientes na tabela")
+    lista_clientes = session.query(Cliente).all()
+
+    for cliente in lista_clientes:
+        print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
+
+def solicitar_dados(cliente,Cliente):
+    os.system(" cls|| clear")
+    print("Solicitando dados para o usuário:")
+    inserir_nome = input("Digite seu nome: ")
+    inserir_email = input("Digite seu email: ")
+    inserir_senha = input("Digite sua senha: ")
+    
+    cliente = Cliente(nome = inserir_nome, email = inserir_email, senha = inserir_senha)
+    session.add(cliente)
+    session.commit()
+
 class Cliente(Base):
     __tablename__ = "clientes"
 
@@ -53,25 +72,14 @@ class Cliente(Base):
 Base.metadata.create_all(bind=MEU_BANCO)
 
 #  CRUD.
+solicitar_dados(Cliente,cliente)
 
 # C - Create - Insert - Salvar.
 
 os.system("clear || cls")
-print("Solicitando dados para o usuário:")
-inserir_nome = input("Digite seu nome: ")
-inserir_email = input("Digite seu email: ")
-inserir_senha = input("Digite sua senha: ")
-
-cliente = Cliente(nome = inserir_nome, email = inserir_email, senha = inserir_senha)
-session.add(cliente)
-session.commit()
 
 # R - Read - Select - Consulta
-print("\nExibindo dados de todos os clientes na tabela")
-lista_clientes = session.query(Cliente).all()
-
-for cliente in lista_clientes:
-    print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
+exibindo_tabela(Cliente,cliente)
 
 # U - Upaate - UPDATE - Atualizar
 print("\nAtualizando dados do usuário. ")
